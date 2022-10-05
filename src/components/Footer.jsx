@@ -40,7 +40,8 @@ export default function Footer() {
       </div>
       <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
       <span className="block text-sm text-white sm:text-center">
-        © 2022 Instituto Misionero ™. Todos los derechos reservados.
+        © 2022 {""} <Link to="/">Instituto Misionero</Link> {""} ™. Todos los
+        derechos reservados.
       </span>
     </footer>
   );
