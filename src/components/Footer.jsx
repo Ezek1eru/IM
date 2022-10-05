@@ -30,10 +30,10 @@ export default function Footer() {
           </li>
           <li>
             <Link
-              to="/terms%26conditions"
+              to="/contacto"
               className="text-lg text-white hover:underline md:mr-6"
             >
-              Contact
+              Contacto
             </Link>
           </li>
         </ul>
