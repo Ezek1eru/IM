@@ -5,12 +5,15 @@ export default function Footer() {
   return (
     <footer className="p-4 bg-gradient-to-r from-red-700 to-red-500">
       <div className="sm:flex sm:items-center sm:justify-between">
-        <a href="#" className="flex items-center sm:mb-0">
-          <GlobalOutlined className="text-white text-lg mr-2" />
-          <span className="self-center text-white text-2xl font-semibold whitespace-nowrap">
+        <div className="flex flex-row">
+          <GlobalOutlined className="text-white text-xl mr-2" />
+          <Link
+            to="/"
+            className="flex text-white font-semibold text-2xl items-center sm:mb-0"
+          >
             Instituto Misionero
-          </span>
-        </a>
+          </Link>
+        </div>
         <ul className="flex flex-wrap items-center mb-6 text-sm text-white sm:mb-0">
           <li>
             <Link
