@@ -17,10 +17,7 @@ export default function Card(props) {
           />
         </svg>
       </div>
-      <div className="ml-4">
-        <h2 className="font-semibold">{props.children}</h2>
-        <p className="mt-2 text-sm text-gray-500">{props.apellidos}</p>
-      </div>
+      <div className="ml-4">{props.children}</div>
     </div>
   );
 }
