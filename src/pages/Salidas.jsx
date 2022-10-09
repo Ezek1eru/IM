@@ -1,9 +1,12 @@
 import DefaultLayout from "../components/DefaultLayout";
+import AddEdditForm from "../components/AddEditForm";
 
 export default function Salidas() {
   return (
     <DefaultLayout>
-      <h1>Salidas</h1>
+      <div>
+        <AddEdditForm></AddEdditForm>
+      </div>
     </DefaultLayout>
   );
 }

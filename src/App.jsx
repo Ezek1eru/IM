@@ -7,6 +7,7 @@ import Directiva from "./pages/Directiva";
 import Cargos from "./pages/Cargos";
 import Salidas from "./pages/Salidas";
 import Usuarios from "./pages/Usuarios";
+import AddEdditForm from "./components/AddEditForm";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/salidas" element={<Salidas />}></Route>
           <Route path="/usuarios" element={<Usuarios />}></Route>
           <Route path="/cargos" element={<Cargos />}></Route>
+          <Route path="/form" element={<AddEdditForm />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
