@@ -23,9 +23,11 @@ export default function Misioneros() {
               <thead>
                 <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                   <th className="py-3 px-6 text-left">Nombre</th>
-                  <th className="py-3 px-6 text-left">Apellido</th>
-                  <th className="py-3 px-6 text-center">Número</th>
+                  <th className="py-3 px-6 text-left">Apellidos</th>
                   <th className="py-3 px-6 text-center">Email</th>
+                  <th className="py-3 px-6 text-center">Carrera</th>
+                  <th className="py-3 px-6 text-center">Número alumno</th>
+                  <th className="py-3 px-6 text-center">Documento</th>
                   <th className="py-3 px-6 text-center">Acciones</th>
                 </tr>
               </thead>
@@ -40,14 +42,20 @@ export default function Misioneros() {
                   </td>
                   <td className="py-3 px-6 text-left">
                     <div className="flex items-center">
-                      <span>Apellido</span>
+                      <span>Apellido Apellidos</span>
                     </div>
+                  </td>
+                  <td className="py-3 px-6 text-center">
+                    <span>name@uap.edu.ar</span>
+                  </td>
+                  <td className="py-3 px-6 text-center">
+                    <span>Ingeniería en Sistemas</span>
                   </td>
                   <td className="py-3 px-6 text-center">
                     <span>xxxxx</span>
                   </td>
                   <td className="py-3 px-6 text-center">
-                    <span>name@uap.edu.ar</span>
+                    <span>xxxxxxxx</span>
                   </td>
                   <td className="py-3 px-6 text-center">
                     <div className="flex item-center justify-center">
