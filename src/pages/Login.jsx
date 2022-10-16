@@ -16,12 +16,12 @@ export default function Login() {
               className="mr-4 text-gray-700 font-bold inline-block mb-2"
               htmlFor="name"
             >
-              Name
+              Email
             </label>
             <input
               type="text"
               className="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded"
-              placeholder="Your name"
+              placeholder="email@uap.edu.ar"
             />
           </div>
           <div>
@@ -29,12 +29,12 @@ export default function Login() {
               className="mr-4 text-gray-700 font-bold inline-block mb-2"
               htmlFor="name"
             >
-              Email
+              Contraseña
             </label>
             <input
-              type="text"
+              type="password"
               className="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded"
-              placeholder="@email"
+              placeholder="Contraseña"
             />
           </div>
           <button className="w-full mt-6 text-indigo-50 font-bold bg-indigo-600 py-3 rounded-md hover:bg-indigo-500 transition duration-300">

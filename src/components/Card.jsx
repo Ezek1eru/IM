@@ -1,10 +1,10 @@
 export default function Card(props) {
   return (
     <div className="flex items-start rounded-xl bg-white p-4 shadow-lg">
-      <div className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-100 bg-gray-50">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-100 bg-gray-50 ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-gray-400"
+          className="h-6 w-6 text-xl text-gray-400"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

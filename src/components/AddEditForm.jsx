@@ -1,19 +1,29 @@
-export default function AddEdditForm() {
+import ModalContainer from "./ModalContainer";
+
+export default function AddEdditForm({ visible, onClose }) {
+  if (!visible) {
+    return null;
+  }
+
+  const handleOnClose = (e) => {
+    if (e.target.id === "container") {
+      onClose();
+    }
+  };
   return (
     <div
-      className="flex items-center justify-center p-7"
-      id="authentication-modal"
-      tabindex="-1"
-      aria-hidden="true"
+      className="flex flex-center fixed inset-0 justify-center items-center p-7 bg-black bg-opacity-30 backdrop-blur-sm"
+      onClick={handleOnClose}
+      id="container"
     >
-      <div className="p-4 w-full max-w-sm bg-white rounded-lg border border-gray-100 shadow-md">
-        <div className="mx-auto w-full max-w-[550px]">
+      <div className="p-4 w-3/4 bg-white rounded-lg border border-gray-100 shadow-md">
+        <div className="mx-auto w-full max-w-full">
           <form>
             <div className="flex ">
               <button
                 type="button"
-                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                data-modal-toggle="authentication-modal"
+                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
+                onClick={() => onClose(false)}
               >
                 <svg
                   aria-hidden="true"
@@ -68,96 +78,131 @@ export default function AddEdditForm() {
               </div>
               <span className="sr-only">Close modal</span>
             </div>
-            <div className="mb-5">
-              <label
-                htmlFor="number"
-                className="mb-3 block text-base font-medium text-[#07074D]"
-              >
-                Numero
-              </label>
-              <input
-                type="number"
-                name="number"
-                id="guest"
-                placeholder="00000"
-                min="10000"
-                className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
+            <div className="-mx-3 flex flex-wrap">
+              <div className="w-full px-3 sm:w-1/2">
+                <div className="mb-5">
+                  <label
+                    htmlFor="celular"
+                    className="mb-3 block text-base font-medium text-[#07074D]"
+                  >
+                    Celular
+                  </label>
+                  <input
+                    type="text"
+                    name="celular"
+                    id="celular"
+                    placeholder="Celular"
+                    className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  />
+                </div>
+              </div>
+              <div className="w-full px-3 sm:w-1/2">
+                <div className="mb-5">
+                  <label
+                    htmlFor="Documento"
+                    className="mb-3 block text-base font-medium text-[#07074D]"
+                  >
+                    Documento
+                  </label>
+                  <input
+                    type="text"
+                    name="documento"
+                    id="documento"
+                    placeholder="Documento"
+                    className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  />
+                </div>
+              </div>
+              <span className="sr-only">Close modal</span>
             </div>
-            <div className="mb-5">
-              <label
-                htmlFor="email"
-                className="mb-3 block text-base font-medium text-[#07074D]"
-              >
-                Email
-              </label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                placeholder="email@uap.edu.ar"
-                className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
+            <div className="-mx-3 flex flex-wrap">
+              <div className="w-full px-3 sm:w-1/2">
+                <div className="mb-5">
+                  <label
+                    htmlFor="number"
+                    className="mb-3 block text-base font-medium text-[#07074D]"
+                  >
+                    Numero
+                  </label>
+                  <input
+                    type="number"
+                    name="number"
+                    id="guest"
+                    placeholder="00000"
+                    min="10000"
+                    className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  />
+                </div>
+              </div>
+              <div className="w-full px-3 sm:w-1/2">
+                <div className="mb-5">
+                  <label
+                    htmlFor="email"
+                    className="mb-3 block text-base font-medium text-[#07074D]"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="email@uap.edu.ar"
+                    className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  />
+                </div>
+              </div>
             </div>
-            <div className="mb-5">
-              <label
-                htmlFor="email"
-                className="mb-3 block text-base font-medium text-[#07074D]"
-              >
-                Categoría
-              </label>
-              <select
-                id="carrera"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              >
-                <option>Categoría</option>
-                <option value="readonly">Económicas</option>
-                <option value="readonly">Humanidades</option>
-                <option value="readonly">Salud</option>
-                <option value="readonly">Teología</option>
-                <option value="readonly">Postgrado</option>
-                <option value="readonly">Pre-Universitario</option>
-                <option value="readonly">ISAP</option>
-                <option value="readonly">IAP</option>
-              </select>
+            <div className="-mx-3 flex flex-wrap">
+              <div className="w-full px-3 sm:w-1/2">
+                <div className="mb-5">
+                  <label
+                    htmlFor="email"
+                    className="mb-3 block text-base font-medium text-[#07074D]"
+                  >
+                    Categoría
+                  </label>
+                  <select
+                    id="carrera"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  >
+                    <option>Categoría</option>
+                    <option value="readonly">Económicas</option>
+                    <option value="readonly">Humanidades</option>
+                    <option value="readonly">Salud</option>
+                    <option value="readonly">Teología</option>
+                    <option value="readonly">Postgrado</option>
+                    <option value="readonly">Pre-Universitario</option>
+                    <option value="readonly">ISAP</option>
+                    <option value="readonly">IAP</option>
+                  </select>
+                </div>
+              </div>
+              <div className="w-full px-3 sm:w-1/2">
+                <div className="mb-5">
+                  <label
+                    htmlFor="email"
+                    className="mb-3 block text-base font-medium text-[#07074D]"
+                  >
+                    Carrera
+                  </label>
+                  <select
+                    id="carrera"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  >
+                    <option>Carrera</option>
+                    <option value="readonly">Económicas</option>
+                    <option value="readonly">Humanidades</option>
+                    <option value="readonly">Salud</option>
+                    <option value="readonly">Teología</option>
+                    <option value="readonly">Postgrado</option>
+                    <option value="readonly">Pre-Universitario</option>
+                    <option value="readonly">ISAP</option>
+                    <option value="readonly">IAP</option>
+                  </select>
+                </div>
+              </div>
             </div>
-            <div className="mb-5">
-              <label
-                htmlFor="email"
-                className="mb-3 block text-base font-medium text-[#07074D]"
-              >
-                Carrera
-              </label>
-              <select
-                id="carrera"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              >
-                <option>Carrera</option>
-                <option value="readonly">Económicas</option>
-                <option value="readonly">Humanidades</option>
-                <option value="readonly">Salud</option>
-                <option value="readonly">Teología</option>
-                <option value="readonly">Postgrado</option>
-                <option value="readonly">Pre-Universitario</option>
-                <option value="readonly">ISAP</option>
-                <option value="readonly">IAP</option>
-              </select>
-            </div>
-            <div className="mb-5">
-              <label
-                htmlFor="email"
-                className="mb-3 block text-base font-medium text-[#07074D]"
-              >
-                Celular
-              </label>
-              <input
-                type="phone"
-                name="phone"
-                id="phone"
-                placeholder="celular"
-                className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
-            </div>
+
             <div>
               <button className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
                 Submit
