@@ -1,12 +1,13 @@
 import DefaultLayout from "../components/DefaultLayout";
 import { useState } from "react";
-import { Dialog } from "@headlessui/react";
+import ModalContainer from "../components/ModalContainer";
 import Card from "../components/Card";
 import UserForm from "../components/UserForm";
-import { Link } from "react-router-dom";
+import { Switch } from "@headlessui/react";
 
 export default function Usuarios() {
   const [viewTable, setViewTable] = useState(false);
+  const [enabled, setEnabled] = useState(true);
 
   const handleOnClose = () => {
     setViewTable(false);
@@ -26,16 +27,15 @@ export default function Usuarios() {
               />
             </div>
             <div className="p-4">
-              <button className="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button
+                className="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={() => setViewTable(true)}
+              >
                 Agregar Usuario
               </button>
             </div>
           </div>
-          <div className=" m-4 grid grid-cols-4 gap-4">
-            <Card>
-              <h2 className="font-semibold">Nombre</h2>
-              <p className="mt-2 text-sm text-gray-500">email@uap.edu.ar</p>
-            </Card>
+          <div className="m-4 grid grid-cols-4 gap-4">
             <Card>
               <h2 className="font-semibold">Nombre</h2>
               <p className="mt-2 text-sm text-gray-500">email@uap.edu.ar</p>
@@ -51,7 +51,9 @@ export default function Usuarios() {
           </div>
         </div>
       </DefaultLayout>
-      {viewTable && <UserForm onClose={handleOnClose} />}
+      <ModalContainer visible={viewTable} onClose={handleOnClose}>
+        <UserForm visible={viewTable} onClose={handleOnClose} />
+      </ModalContainer>
     </div>
   );
 }

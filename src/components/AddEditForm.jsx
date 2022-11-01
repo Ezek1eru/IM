@@ -1,21 +1,6 @@
-import ModalContainer from "./ModalContainer";
-
 export default function AddEdditForm({ visible, onClose }) {
-  if (!visible) {
-    return null;
-  }
-
-  const handleOnClose = (e) => {
-    if (e.target.id === "container") {
-      onClose();
-    }
-  };
   return (
-    <div
-      className="flex flex-center fixed inset-0 justify-center items-center p-7 bg-black bg-opacity-30 backdrop-blur-sm"
-      onClick={handleOnClose}
-      id="container"
-    >
+    <div className="flex flex-center fixed inset-0 justify-center items-center p-7 bg-black bg-opacity-30 backdrop-blur-sm">
       <div className="p-4 w-3/4 bg-white rounded-lg border border-gray-100 shadow-md">
         <div className="mx-auto w-full max-w-full">
           <form>

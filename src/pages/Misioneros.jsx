@@ -132,7 +132,9 @@ export default function Misioneros() {
           </div>
         </div>
       </DefaultLayout>
-      {viewTable && <AddEditForm visible={viewTable} onClose={handleOnClose} />}
+      <ModalContainer visible={viewTable} onClose={handleOnClose}>
+        <AddEditForm visible={viewTable} onClose={handleOnClose} />
+      </ModalContainer>
     </div>
   );
 }

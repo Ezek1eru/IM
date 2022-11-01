@@ -1,4 +1,8 @@
+import { useState } from "react";
+import { Switch } from "@headlessui/react";
+
 export default function Card(props) {
+  const [enabled, setEnabled] = useState(true);
   return (
     <div className="flex items-start rounded-xl bg-white p-4 shadow-lg">
       <div className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-100 bg-gray-50 ">
@@ -17,7 +21,27 @@ export default function Card(props) {
           />
         </svg>
       </div>
-      <div className="ml-4">{props.children}</div>
+      <div className="ml-4">
+        <div className="grid grid-cols-2 ">
+          <div>{props.children}</div>
+          <div className="mt-4 ml-5">
+            <Switch
+              checked={enabled}
+              onChange={setEnabled}
+              className={`${
+                enabled ? "bg-blue-600" : "bg-gray-200"
+              } relative inline-flex h-6 w-11 mb-3 items-center rounded-full `}
+            >
+              <span className="sr-only">Activo</span>
+              <span
+                className={`${
+                  enabled ? "translate-x-6" : "translate-x-1"
+                } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+              />
+            </Switch>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

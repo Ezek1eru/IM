@@ -1,4 +1,4 @@
-export default function ModalContainer(props, { visible, onClose }) {
+export default function ModalContainer({ visible, onClose, children }) {
   if (!visible) {
     return null;
   }
@@ -14,7 +14,7 @@ export default function ModalContainer(props, { visible, onClose }) {
       onClick={handleOnClose}
       id="container"
     >
-      {props.children}
+      {children}
     </div>
   );
 }
