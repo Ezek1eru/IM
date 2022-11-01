@@ -2,6 +2,7 @@ import DefaultLayout from "../components/DefaultLayout";
 import ModalContainer from "../components/ModalContainer";
 import GrupoForm from "../components/GrupoForm";
 import { useState } from "react";
+import Pagination from "../components/Pagination";
 
 export default function Grupos() {
   const [viewTable, setViewTable] = useState(false);
@@ -128,6 +129,7 @@ export default function Grupos() {
           </div>
         </div>
       </DefaultLayout>
+      <Pagination />
       <ModalContainer visible={viewTable} onClose={handleOnClose}>
         <GrupoForm onClose={handleOnClose} />
       </ModalContainer>

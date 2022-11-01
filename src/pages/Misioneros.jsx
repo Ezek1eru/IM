@@ -2,6 +2,7 @@ import DefaultLayout from "../components/DefaultLayout";
 import { useState } from "react";
 import ModalContainer from "../components/ModalContainer";
 import AddEditForm from "../components/AddEditForm";
+import Pagination from "../components/Pagination";
 
 export default function Misioneros() {
   const [viewTable, setViewTable] = useState(false);
@@ -132,6 +133,8 @@ export default function Misioneros() {
           </div>
         </div>
       </DefaultLayout>
+      {/* Poner el Pagination al final de la pagina */}
+      <Pagination  />
       <ModalContainer visible={viewTable} onClose={handleOnClose}>
         <AddEditForm visible={viewTable} onClose={handleOnClose} />
       </ModalContainer>
