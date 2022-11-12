@@ -8,6 +8,8 @@ import Cargos from "./pages/Cargos";
 import Salidas from "./pages/Salidas";
 import Usuarios from "./pages/Usuarios";
 import { AuthProvider } from "./context/AuthContext";
+import UserForm from "./components/UserForm";
+import AddEdditForm from "./components/AddEditForm";
 
 function App() {
   return (
