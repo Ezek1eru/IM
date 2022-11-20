@@ -1,4 +1,11 @@
 export default function AddEdditForm({ visible, onClose }) {
+  const crearMisionero = async (e) => {
+    const { data } = await axios.post("http://localhost:3000/api/misioneros", {
+      ...e.target,
+    });
+    console.log(data);
+  };
+
   return (
     <div className="flex flex-center fixed inset-0 justify-center items-center p-7 bg-black bg-opacity-30 backdrop-blur-sm">
       <div className="p-4 w-3/4 bg-white rounded-lg border border-gray-100 shadow-md">
@@ -30,7 +37,7 @@ export default function AddEdditForm({ visible, onClose }) {
               <div className="w-full px-3 sm:w-1/2">
                 <div className="mb-5">
                   <label
-                    htmlFor="fName"
+                    data="nombre"
                     className="mb-3 block text-base font-medium text-[#07074D]"
                   >
                     First Name
@@ -47,7 +54,7 @@ export default function AddEdditForm({ visible, onClose }) {
               <div className="w-full px-3 sm:w-1/2">
                 <div className="mb-5">
                   <label
-                    htmlFor="lName"
+                    data="apellidos"
                     className="mb-3 block text-base font-medium text-[#07074D]"
                   >
                     Apellidos
@@ -189,8 +196,11 @@ export default function AddEdditForm({ visible, onClose }) {
             </div>
 
             <div>
-              <button className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                Submit
+              <button
+                className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                onClick={crearMisionero}
+              >
+                Añadir Misionero
               </button>
             </div>
           </form>

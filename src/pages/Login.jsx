@@ -1,34 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { Alert } from "./Alert";
 
 export default function Login() {
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
-  const { login } = useAuth();
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await login(user.email, user.password);
-      navigate("/");
-    } catch (error) {
-      setError("El usuario o contraseña es inválido, prube de nuevo");
-    }
-  };
-
-  const handleChange = ({ target: { value, name } }) =>
-    setUser({ ...user, [name]: value });
-
   return (
     <div className="flex flex-row h-screen w-screen items-center justify-around bg-gradient-to-r from-red-700 to-red-500">
-      {error && <Alert message={error} />}
       <div className="h-96">
         <lottie-player
           src="https://assets2.lottiefiles.com/packages/lf20_z2sbj8cm.json"
