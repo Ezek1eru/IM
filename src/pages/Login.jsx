@@ -17,7 +17,7 @@ export default function Login() {
     setError("");
     try {
       await login(user.email, user.password);
-      navigate("/");
+      navigate("/Home");
     } catch (error) {
       setError("El usuario o contraseña es inválido, prube de nuevo");
     }
