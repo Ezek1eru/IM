@@ -1,7 +1,9 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Dropdown from "./components/Dropdown";
 import Cargos from "./pages/Cargos";
 import Directiva from "./pages/Directiva";
 import Grupos from "./pages/Grupos";
+import GrupoUserPage from "./pages/GrupoUserPage";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Misioneros from "./pages/Misioneros";
@@ -21,6 +23,7 @@ function App() {
           <Route path="/usuarios" element={<Usuarios />}></Route>
           <Route path="/salidas" element={<Salidas />}></Route>
           <Route path="/cargos" element={<Cargos />}></Route>
+          <Route path="/prueba" element={<GrupoUserPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

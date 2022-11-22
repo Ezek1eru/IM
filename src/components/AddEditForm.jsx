@@ -1,10 +1,13 @@
+import { useEffect, useState } from "react";
+
 export default function AddEdditForm({ visible, onClose }) {
-  const crearMisionero = async (e) => {
-    const { data } = await axios.post("http://localhost:3000/api/misioneros", {
-      ...e.target,
-    });
-    console.log(data);
-  };
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/categorias")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
 
   return (
     <div className="flex flex-center fixed inset-0 justify-center items-center p-7 bg-black bg-opacity-30 backdrop-blur-sm">
@@ -158,14 +161,16 @@ export default function AddEdditForm({ visible, onClose }) {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   >
                     <option>Categoría</option>
-                    <option value="readonly">Económicas</option>
-                    <option value="readonly">Humanidades</option>
-                    <option value="readonly">Salud</option>
-                    <option value="readonly">Teología</option>
-                    <option value="readonly">Postgrado</option>
-                    <option value="readonly">Pre-Universitario</option>
-                    <option value="readonly">ISAP</option>
-                    <option value="readonly">IAP</option>
+                    {data &&
+                      data.map((item) => (
+                        <option
+                          key={item.id}
+                          value={item.id}
+                          className="text-black-500"
+                        >
+                          {item.nombre}
+                        </option>
+                      ))}
                   </select>
                 </div>
               </div>
@@ -182,14 +187,16 @@ export default function AddEdditForm({ visible, onClose }) {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   >
                     <option>Carrera</option>
-                    <option value="readonly">Económicas</option>
-                    <option value="readonly">Humanidades</option>
-                    <option value="readonly">Salud</option>
-                    <option value="readonly">Teología</option>
-                    <option value="readonly">Postgrado</option>
-                    <option value="readonly">Pre-Universitario</option>
-                    <option value="readonly">ISAP</option>
-                    <option value="readonly">IAP</option>
+                    {data &&
+                      data.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {item.carreras.map((item) => (
+                            <option key={item.id} value={item.id}>
+                              {item.nombre}
+                            </option>
+                          ))}
+                        </option>
+                      ))}
                   </select>
                 </div>
               </div>
@@ -198,7 +205,7 @@ export default function AddEdditForm({ visible, onClose }) {
             <div>
               <button
                 className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-                onClick={crearMisionero}
+                // onClick={crearMisionero}
               >
                 Añadir Misionero
               </button>

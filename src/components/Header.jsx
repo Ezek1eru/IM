@@ -1,10 +1,11 @@
 import { GlobalOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import Misioneros from "../pages/Misioneros";
+import Dropdown from "./Dropdown";
 
 export default function Header() {
   return (
-    <div className="flex flex-wrap place-items-center">
+    <div className="flex flex-wrap place-items-center content-center">
       <section className="relative mx-auto">
         <nav className="flex justify-between bg-gradient-to-r from-red-700 to-red-500 w-screen">
           <div className="px-5 py-6 flex w-full items-center">
@@ -33,29 +34,7 @@ export default function Header() {
               </li>
             </ul>
             <div>
-              <button
-                id="dropdownInformationButton"
-                data-dropdown-toggle="dropdownInformation"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center "
-                type="button"
-              >
-                Menu
-                <svg
-                  className="ml-2 w-4 h-4"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19 9l-7 7-7-7"
-                  ></path>
-                </svg>
-              </button>
+              <Dropdown />
             </div>
           </div>
         </nav>
@@ -63,4 +42,3 @@ export default function Header() {
     </div>
   );
 }
-    

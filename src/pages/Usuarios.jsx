@@ -1,13 +1,20 @@
-import DefaultLayout from "../components/DefaultLayout";
-import { useState } from "react";
-import ModalContainer from "../components/ModalContainer";
-import Card from "../components/Card";
-import UserForm from "../components/UserForm";
 import { Switch } from "@headlessui/react";
+import { useEffect, useState } from "react";
+import Card from "../components/Card";
+import DefaultLayout from "../components/DefaultLayout";
+import ModalContainer from "../components/ModalContainer";
+import UserForm from "../components/UserForm";
 
 export default function Usuarios() {
   const [viewTable, setViewTable] = useState(false);
   const [enabled, setEnabled] = useState(true);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/usuario")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
 
   const handleOnClose = () => {
     setViewTable(false);
@@ -36,18 +43,13 @@ export default function Usuarios() {
             </div>
           </div>
           <div className="m-4 grid grid-cols-4 gap-4">
-            <Card>
-              <h2 className="font-semibold">Nombre</h2>
-              <p className="mt-2 text-sm text-gray-500">email@uap.edu.ar</p>
-            </Card>
-            <Card>
-              <h2 className="font-semibold">Nombre</h2>
-              <p className="mt-2 text-sm text-gray-500">email@uap.edu.ar</p>
-            </Card>
-            <Card>
-              <h2 className="font-semibold">Nombre</h2>
-              <p className="mt-2 text-sm text-gray-500">email@uap.edu.ar</p>
-            </Card>
+            {data &&
+              data.map((usuario, i) => (
+                <Card key={usuario._id} value={usuario._id}>
+                  <h2 className="font-semibold">{usuario.nombre_usuario}</h2>
+                  <p className="mt-2 text-sm text-gray-500">{usuario.email}</p>
+                </Card>
+              ))}
           </div>
         </div>
       </DefaultLayout>

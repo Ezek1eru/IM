@@ -1,9 +1,12 @@
+import DefaultLayout from "../components/DefaultLayout";
 import HeaderGrupo from "../components/HeaderGrupo";
 
 export default function GrupoUserPage() {
   return (
     <div>
-      <HeaderGrupo />
+      <DefaultLayout>
+        <HeaderGrupo />
+      </DefaultLayout>
     </div>
   );
 }

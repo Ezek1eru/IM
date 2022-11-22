@@ -1,11 +1,16 @@
 // import ModalContainer from "./ModalContainer";
 import { Dialog, Switch } from "@headlessui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function UserForm({ visible, onClose }) {
   const [enabled, setEnabled] = useState(true);
+  const [data, setData] = useState(null);
 
- 
+  useEffect(() => {
+    fetch("http://localhost:3000/api/cargos")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
 
   return (
     <div className="flex flex-center fixed inset-0 justify-center items-center p-7 bg-black bg-opacity-30 backdrop-blur-sm">
@@ -36,15 +41,14 @@ export default function UserForm({ visible, onClose }) {
             </div>
             <div className="mb-5">
               <label
-                htmlFor="fName"
+                id="nombre"
                 className="mb-3 block text-base font-medium text-[#07074D]"
               >
                 Nombre Usuario
               </label>
               <input
                 type="text"
-                name="fName"
-                id="fName"
+                id="nombre"
                 placeholder="Nombre Usuario"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
@@ -58,6 +62,7 @@ export default function UserForm({ visible, onClose }) {
               <input
                 type="password"
                 placeholder="Contraseña"
+                id="password"
                 className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
@@ -84,27 +89,27 @@ export default function UserForm({ visible, onClose }) {
                 Cargo
               </label>
               <select
-                id="carrera"
+                id="cargo"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               >
                 <option>Seleccione un Cargo</option>
-                <option value="readonly">Directiva</option>
-                <option value="readonly">Director de Grupo</option>
-                <option value="readonly">Presidente</option>
-                <option value="readonly">Secretaria</option>
+                {data &&
+                  data.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.nombre}
+                    </option>
+                  ))}
               </select>
             </div>
 
             <div className="mb-5">
-              <label
-                htmlFor="email"
-                className="mb-3 block text-base font-medium text-[#07074D]"
-              >
+              <label className="mb-3 block text-base font-medium text-[#07074D]">
                 Usuario Activo
               </label>
               <Switch
                 checked={enabled}
                 onChange={setEnabled}
+                id="enabled"
                 className={`${
                   enabled ? "bg-blue-600" : "bg-gray-200"
                 } relative inline-flex h-6 w-11 mb-3 items-center rounded-full `}
@@ -119,9 +124,7 @@ export default function UserForm({ visible, onClose }) {
             </div>
             <span className="sr-only">Close modal</span>
             <div>
-              <button
-                className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-              >
+              <button className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
                 Agregar Usuario
               </button>
             </div>
