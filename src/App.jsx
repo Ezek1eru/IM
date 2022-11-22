@@ -1,5 +1,11 @@
-import Login from "./pages/Login";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Dropdown from "./components/Dropdown";
+import Cargos from "./pages/Cargos";
+import Directiva from "./pages/Directiva";
+import Grupos from "./pages/Grupos";
+import GrupoUserPage from "./pages/GrupoUserPage";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Misioneros from "./pages/Misioneros";
 import Grupos from "./pages/Grupos";
 import Directiva from "./pages/Directiva";
@@ -26,7 +32,6 @@ function App() {
           </Routes>
         </BrowserRouter>
       </AuthProvider>
-
     </div>
   );
 }

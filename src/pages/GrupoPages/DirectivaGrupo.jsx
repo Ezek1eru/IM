@@ -1,19 +1,12 @@
-import DefaultLayout from "../components/DefaultLayout";
+import DefaultLayoutGrupo from "../../layouts/DefaultLayoutGrupo";
 import Card from "../components/Card";
-import { useState } from "react";
 import ModalContainer from "../components/ModalContainer";
 import DirectivaForm from "../components/DirectivaForm";
 
 export default function Directiva() {
-  const [viewTable, setViewTable] = useState(false);
-
-  const handleOnClose = () => {
-    setViewTable(false);
-  };
-
   return (
     <div>
-      <DefaultLayout>
+      <DefaultLayoutGrupo>
         <div className="flex flex-col justify-center font-sans overflow-hidden">
           <div className="flex flex-row items-center justify-center">
             <div className="p-4">
@@ -24,14 +17,6 @@ export default function Directiva() {
                 placeholder="Buscar Miembro Directiva"
               />
             </div>
-            <button
-              className="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => {
-                setViewTable(true);
-              }}
-            >
-              Agregar Miembro Directiva
-            </button>
           </div>
           <div className=" m-4 grid grid-cols-4 gap-4">
             <Card>
@@ -76,10 +61,7 @@ export default function Directiva() {
             </Card>
           </div>
         </div>
-      </DefaultLayout>
-      <ModalContainer visible={viewTable} onClose={handleOnClose}>
-        <DirectivaForm onClose={handleOnClose} />
-      </ModalContainer>
+      </DefaultLayoutGrupo>
     </div>
   );
 }
