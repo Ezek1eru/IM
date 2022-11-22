@@ -8,14 +8,56 @@ export default function Misioneros() {
   const [viewTable, setViewTable] = useState(false);
   const [data, setData] = useState(null);
 
+  const getMisioneros = () => {
+    fetch("http://localhost:3000/api/misioneros")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  };
+
   useEffect(() => {
     fetch("http://localhost:3000/api/misioneros")
       .then((res) => res.json())
       .then((data) => setData(data));
-  }, []);
+  }, [getMisioneros]);
 
   const handleOnClose = () => {
     setViewTable(false);
+  };
+
+  const getMisionerosById = (id) => {
+    fetch(`http://localhost:3000/api/misioneros/${id}`)
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  };
+
+  const updateMisionero = (id, data) => {
+    fetch(`http://localhost:3000/api/misioneros/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const newData = data.map((misionero) => {
+          if (misionero.id === id) {
+            return data;
+          }
+          return misionero;
+        });
+        setData(newData);
+      });
+  };
+
+  const deleteMisionero = (id) => {
+    fetch(`http://localhost:3000/api/misioneros/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+      });
   };
 
   return (
@@ -121,6 +163,7 @@ export default function Misioneros() {
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
+                                onClick={() => setViewTable(true)}
                               >
                                 <path
                                   strokeLinecap="round"
@@ -136,6 +179,7 @@ export default function Misioneros() {
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
+                                onClick={() => deleteMisionero(misionero._id)}
                               >
                                 <path
                                   strokeLinecap="round"
@@ -155,7 +199,7 @@ export default function Misioneros() {
           </div>
         </div>
       </DefaultLayout>
-      <Pagination />
+      {/* <Pagination /> */}
       <ModalContainer visible={viewTable} onClose={handleOnClose}>
         <AddEditForm visible={viewTable} onClose={handleOnClose} />
       </ModalContainer>

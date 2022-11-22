@@ -1,16 +1,24 @@
 // import ModalContainer from "./ModalContainer";
 import { Dialog, Switch } from "@headlessui/react";
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function UserForm({ visible, onClose }) {
   const [enabled, setEnabled] = useState(true);
   const [data, setData] = useState(null);
 
+  const getUsers = () => {
+    axios
+      .get("http://localhost:3000/api/users")
+      .then((res) => setData(res.data))
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     fetch("http://localhost:3000/api/cargos")
       .then((res) => res.json())
       .then((data) => setData(data));
-  }, []);
+  }, [getUsers]);
 
   return (
     <div className="flex flex-center fixed inset-0 justify-center items-center p-7 bg-black bg-opacity-30 backdrop-blur-sm">
@@ -41,14 +49,15 @@ export default function UserForm({ visible, onClose }) {
             </div>
             <div className="mb-5">
               <label
-                id="nombre"
+                id="nombre_usuario"
                 className="mb-3 block text-base font-medium text-[#07074D]"
               >
                 Nombre Usuario
               </label>
               <input
                 type="text"
-                id="nombre"
+                id="nombre_usuario"
+                name="nombre_usuario"
                 placeholder="Nombre Usuario"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
@@ -63,6 +72,7 @@ export default function UserForm({ visible, onClose }) {
                 type="password"
                 placeholder="Contraseña"
                 id="password"
+                name="password"
                 className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
@@ -90,6 +100,7 @@ export default function UserForm({ visible, onClose }) {
               </label>
               <select
                 id="cargo"
+                name="cargo"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               >
                 <option>Seleccione un Cargo</option>
@@ -110,6 +121,7 @@ export default function UserForm({ visible, onClose }) {
                 checked={enabled}
                 onChange={setEnabled}
                 id="enabled"
+                name="activo"
                 className={`${
                   enabled ? "bg-blue-600" : "bg-gray-200"
                 } relative inline-flex h-6 w-11 mb-3 items-center rounded-full `}

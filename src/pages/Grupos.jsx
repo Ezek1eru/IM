@@ -135,7 +135,7 @@ export default function Grupos() {
           </div>
         </div>
       </DefaultLayout>
-      <Pagination />
+      {/* <Pagination /> */}
       <ModalContainer visible={viewTable} onClose={handleOnClose}>
         <GrupoForm onClose={handleOnClose} />
       </ModalContainer>

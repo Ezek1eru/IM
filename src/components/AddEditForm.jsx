@@ -9,11 +9,15 @@ export default function AddEdditForm({ visible, onClose }) {
       .then((data) => setData(data));
   }, []);
 
+  const newMisionero = (req, res) => {
+    console.log(req.body);
+  };
+
   return (
     <div className="flex flex-center fixed inset-0 justify-center items-center p-7 bg-black bg-opacity-30 backdrop-blur-sm">
       <div className="p-4 w-3/4 bg-white rounded-lg border border-gray-100 shadow-md">
         <div className="mx-auto w-full max-w-full">
-          <form>
+          <form autoComplete="off">
             <div className="flex ">
               <button
                 type="button"
@@ -158,14 +162,15 @@ export default function AddEdditForm({ visible, onClose }) {
                   </label>
                   <select
                     id="carrera"
+                    name="categoria"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   >
                     <option>Categoría</option>
                     {data &&
                       data.map((item) => (
                         <option
-                          key={item.id}
-                          value={item.id}
+                          key={item._id}
+                          value={item._id}
                           className="text-black-500"
                         >
                           {item.nombre}
@@ -184,19 +189,15 @@ export default function AddEdditForm({ visible, onClose }) {
                   </label>
                   <select
                     id="carrera"
+                    name="carrera"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   >
                     <option>Carrera</option>
-                    {data &&
-                      data.map((item) => (
-                        <option key={item.id} value={item.id}>
-                          {item.carreras.map((item) => (
-                            <option key={item.id} value={item.id}>
-                              {item.nombre}
-                            </option>
-                          ))}
-                        </option>
-                      ))}
+                    <option value="1">Ingeniería en Sistemas</option>
+                    <option value="2">Ingeniería en Informática</option>
+                    <option value="3">Ingeniería en Electrónica</option>
+                    <option value="4">Ingeniería en Mecatrónica</option>
+                    <option value="5">Ingeniería en Mecánica</option>
                   </select>
                 </div>
               </div>
@@ -205,7 +206,8 @@ export default function AddEdditForm({ visible, onClose }) {
             <div>
               <button
                 className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-                // onClick={crearMisionero}
+                type="submit"
+                onClick={newMisionero}
               >
                 Añadir Misionero
               </button>
