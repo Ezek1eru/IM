@@ -7,6 +7,39 @@ import Pagination from "../components/Pagination";
 export default function Grupos() {
   const [viewTable, setViewTable] = useState(false);
   const [data, setData] = useState(null);
+  const [grupo, setGrupo] = useState(null);
+
+  async function deleteGrupo(id) {
+    await fetch(`http://localhost:3000/api/grupos/${id}`, {
+      method: "DELETE",
+    });
+    getGrupos();
+  }
+
+  //funcion para obtener los datos del grupo en el formulario
+  async function getGrupoById(id) {
+    const res = await fetch(`http://localhost:3000/api/grupos/${id}`);
+    const data = await res.json();
+    return data;
+  }
+
+  const getGrupos = () => {
+    fetch("http://localhost:3000/api/grupos")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  };
+
+  async function updateGrupo(id, updatedGrupo) {
+    await fetch(`http://localhost:3000/api/grupos/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedGrupo),
+    });
+    getGrupos();
+    setViewTable(true);
+  }
 
   const handleOnClose = () => {
     setViewTable(false);
@@ -16,7 +49,7 @@ export default function Grupos() {
     fetch("http://localhost:3000/api/grupos")
       .then((res) => res.json())
       .then((data) => setData(data));
-  }, []);
+  }, [getGrupos]);
 
   return (
     <div>
@@ -54,7 +87,10 @@ export default function Grupos() {
                 <tbody className="text-gray-600 text-sm font-light">
                   {data &&
                     data.map((grupo, i) => (
-                      <tr className="border-b border-gray-200 hover:bg-gray-100">
+                      <tr
+                        key={grupo._id}
+                        className="border-b border-gray-200 hover:bg-gray-100"
+                      >
                         <td className="py-3 px-6 text-left whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="mr-2">
@@ -101,6 +137,13 @@ export default function Grupos() {
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
+                                onClick={() => {
+                                  setViewTable(true);
+                                  setGrupo(grupo);
+                                  // mostrar los datos del grupo en el formulario
+                                  
+                                  console.log(grupo);
+                                }}
                               >
                                 <path
                                   strokeLinecap="round"
@@ -116,6 +159,7 @@ export default function Grupos() {
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
+                                onClick={() => deleteGrupo(grupo._id)}
                               >
                                 <path
                                   strokeLinecap="round"

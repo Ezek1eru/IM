@@ -14,6 +14,12 @@ export default function UserForm({ visible, onClose }) {
       .catch((err) => console.log(err));
   };
 
+  const getGrupos = () => {
+    fetch("http://localhost:3000/api/grupos")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  };
+
   useEffect(() => {
     fetch("http://localhost:3000/api/cargos")
       .then((res) => res.json())
@@ -105,6 +111,27 @@ export default function UserForm({ visible, onClose }) {
               >
                 <option>Seleccione un Cargo</option>
                 {data &&
+                  data.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.nombre}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div className="mb-5">
+              <label
+                htmlFor="email"
+                className="mb-3 block text-base font-medium text-[#07074D]"
+              >
+                Cargo
+              </label>
+              <select
+                id="cargo"
+                name="cargo"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              >
+                <option>Seleccione un Cargo</option>
+                {getGrupos &&
                   data.map((item) => (
                     <option key={item._id} value={item._id}>
                       {item.nombre}

@@ -14,6 +14,42 @@ export default function Misioneros() {
       .then((data) => setData(data));
   };
 
+  async function createMisionero(misionero) {
+    await fetch("http://localhost:3000/api/misioneros", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(misionero),
+    });
+    getMisioneros();
+  }
+
+  async function getMisioneroById(id) {
+    const res = await fetch(`http://localhost:3000/api/misioneros/${id}`);
+    const data = await res.json();
+    return data;
+  }
+
+  async function updateMisionero(id, updatedMisionero) {
+    await fetch(`http://localhost:3000/api/misioneros/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedMisionero),
+    });
+    getMisioneros();
+    setViewTable(true);
+  }
+
+  async function deleteMisionero(id) {
+    await fetch(`http://localhost:3000/api/misioneros/${id}`, {
+      method: "DELETE",
+    });
+    getMisioneros();
+  }
+
   useEffect(() => {
     fetch("http://localhost:3000/api/misioneros")
       .then((res) => res.json())
@@ -22,42 +58,6 @@ export default function Misioneros() {
 
   const handleOnClose = () => {
     setViewTable(false);
-  };
-
-  const getMisionerosById = (id) => {
-    fetch(`http://localhost:3000/api/misioneros/${id}`)
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  };
-
-  const updateMisionero = (id, data) => {
-    fetch(`http://localhost:3000/api/misioneros/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const newData = data.map((misionero) => {
-          if (misionero.id === id) {
-            return data;
-          }
-          return misionero;
-        });
-        setData(newData);
-      });
-  };
-
-  const deleteMisionero = (id) => {
-    fetch(`http://localhost:3000/api/misioneros/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-      });
   };
 
   return (
@@ -163,7 +163,10 @@ export default function Misioneros() {
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
-                                onClick={() => setViewTable(true)}
+                                onClick={() => {
+                                  setViewTable(true);
+                                  setMisionero(misionero);
+                                }}
                               >
                                 <path
                                   strokeLinecap="round"

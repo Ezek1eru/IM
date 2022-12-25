@@ -3,13 +3,18 @@ import { Dialog, Switch } from "@headlessui/react";
 import { useState } from "react";
 
 export default function UserForm({ visible, onClose }) {
-  const [enabled, setEnabled] = useState(true); 
-  
+  const [enabled, setEnabled] = useState(true);
+
   return (
     <div className="flex flex-center fixed inset-0 justify-center items-center p-7 bg-black bg-opacity-30 backdrop-blur-sm">
       <div className="p-4 w-full max-w-sm bg-white rounded-lg border border-gray-100 shadow-md">
         <div className="mx-auto w-full max-w-[550px]">
-          <form>
+          <form
+            onSubmit={(ev) => {
+              ev.preventDefault();
+              console.log(ev.target.fName.value, ev.target.lName.value, ev.target.name.value, ev.target.name.value, ev.target.name.value ,ev.target.name.value);
+            }}
+          >
             <div className="flex ">
               <button
                 type="button"

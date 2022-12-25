@@ -2,6 +2,14 @@ import { useEffect, useState } from "react";
 
 export default function AddEdditForm({ visible, onClose }) {
   const [data, setData] = useState(null);
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [documento, setDocumento] = useState("");
+  const [numero_alumno, setNumero_alumno] = useState("");
+  const [categoria, setCategoria] = useState("");
+  const [carrera, setCarrera] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:3000/api/categorias")
@@ -9,15 +17,31 @@ export default function AddEdditForm({ visible, onClose }) {
       .then((data) => setData(data));
   }, []);
 
-  const newMisionero = (req, res) => {
-    console.log(req.body);
-  };
+  async function handleSubmit(e) {
+    fetch("http://localhost:3000/api/misioneros", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nombre: name,
+        apellidos: lastName,
+        celular: phone,
+        email: email,
+        documento: documento,
+        numero_alumno: numero_alumno,
+        categoria: categoria,
+        carrera: carrera,
+      }),
+    });
+    onClose(false);
+  }
 
   return (
     <div className="flex flex-center fixed inset-0 justify-center items-center p-7 bg-black bg-opacity-30 backdrop-blur-sm">
       <div className="p-4 w-3/4 bg-white rounded-lg border border-gray-100 shadow-md">
         <div className="mx-auto w-full max-w-full">
-          <form autoComplete="off">
+          <form onSubmit={handleSubmit} autoComplete="off">
             <div className="flex ">
               <button
                 type="button"
@@ -52,9 +76,10 @@ export default function AddEdditForm({ visible, onClose }) {
                   <input
                     type="text"
                     name="fName"
-                    id="fName"
+                    value={name}
                     placeholder="Nombre"
                     className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
               </div>
@@ -69,9 +94,10 @@ export default function AddEdditForm({ visible, onClose }) {
                   <input
                     type="text"
                     name="lName"
-                    id="lName"
+                    value={lastName}
                     placeholder="Apellidos"
                     className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    onChange={(e) => setLastName(e.target.value)}
                   />
                 </div>
               </div>
@@ -89,9 +115,10 @@ export default function AddEdditForm({ visible, onClose }) {
                   <input
                     type="text"
                     name="celular"
-                    id="celular"
+                    value={phone}
                     placeholder="Celular"
                     className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
               </div>
@@ -106,9 +133,10 @@ export default function AddEdditForm({ visible, onClose }) {
                   <input
                     type="text"
                     name="documento"
-                    id="documento"
+                    value={documento}
                     placeholder="Documento"
                     className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    onChange={(e) => setDocumento(e.target.value)}
                   />
                 </div>
               </div>
@@ -126,10 +154,11 @@ export default function AddEdditForm({ visible, onClose }) {
                   <input
                     type="number"
                     name="number"
-                    id="guest"
+                    value={numero_alumno}
                     placeholder="00000"
                     min="10000"
                     className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    onChange={(e) => setNumero_alumno(e.target.value)}
                   />
                 </div>
               </div>
@@ -144,9 +173,10 @@ export default function AddEdditForm({ visible, onClose }) {
                   <input
                     type="text"
                     name="email"
-                    id="email"
+                    value={email}
                     placeholder="email@uap.edu.ar"
                     className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
@@ -160,10 +190,20 @@ export default function AddEdditForm({ visible, onClose }) {
                   >
                     Categoría
                   </label>
-                  <select
+                  <input
+                    type="text"
+                    name="Categoria"
+                    value={categoria}
+                    placeholder="Categoria de la carrera"
+                    className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    onChange={(e) => setCategoria(e.target.value)}
+                  />
+                  {/* <select
                     id="carrera"
                     name="categoria"
+                    value={categoria}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    onChange={(e) => setCategoria(e.target.value)}
                   >
                     <option>Categoría</option>
                     {data &&
@@ -176,7 +216,7 @@ export default function AddEdditForm({ visible, onClose }) {
                           {item.nombre}
                         </option>
                       ))}
-                  </select>
+                  </select> */}
                 </div>
               </div>
               <div className="w-full px-3 sm:w-1/2">
@@ -187,10 +227,20 @@ export default function AddEdditForm({ visible, onClose }) {
                   >
                     Carrera
                   </label>
-                  <select
+                  <input
+                    type="text"
+                    name="Carrera"
+                    value={carrera}
+                    placeholder="Carrera"
+                    className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    onChange={(e) => setCarrera(e.target.value)}
+                  />
+                  {/* <select
                     id="carrera"
                     name="carrera"
+                    value={carrera}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    onChange={(e) => setCarrera(e.target.value)}
                   >
                     <option>Carrera</option>
                     <option value="1">Ingeniería en Sistemas</option>
@@ -198,7 +248,7 @@ export default function AddEdditForm({ visible, onClose }) {
                     <option value="3">Ingeniería en Electrónica</option>
                     <option value="4">Ingeniería en Mecatrónica</option>
                     <option value="5">Ingeniería en Mecánica</option>
-                  </select>
+                  </select> */}
                 </div>
               </div>
             </div>
@@ -207,7 +257,6 @@ export default function AddEdditForm({ visible, onClose }) {
               <button
                 className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
                 type="submit"
-                onClick={newMisionero}
               >
                 Añadir Misionero
               </button>

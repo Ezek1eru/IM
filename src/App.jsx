@@ -1,4 +1,10 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
 import Dropdown from "./components/Dropdown";
 import { AuthProvider } from "./context/AuthContext";
 import Cargos from "./pages/Cargos";
@@ -25,6 +31,7 @@ function App() {
             <Route path="/usuarios" element={<Usuarios />}></Route>
             <Route path="/salidas" element={<Salidas />}></Route>
             <Route path="/cargos" element={<Cargos />}></Route>
+            <Route path="/ptueba" element={<GrupoUserPage />}></Route>
           </Routes>
         </BrowserRouter>
       </AuthProvider>

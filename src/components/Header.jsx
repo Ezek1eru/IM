@@ -10,7 +10,7 @@ export default function Header() {
         <nav className="flex justify-between bg-gradient-to-r from-red-700 to-red-500 w-screen">
           <div className="px-5 py-6 flex w-full items-center">
             <GlobalOutlined className="text-2xl text-white mr-2"></GlobalOutlined>
-            <Link to="/" className="text-3xl text-white font-bold font-heading">
+            <Link to="/Home" className="text-3xl text-white font-bold font-heading">
               Instituto Misionero
             </Link>
             <ul className="text-white hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
